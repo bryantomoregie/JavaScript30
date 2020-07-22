@@ -21,6 +21,26 @@
   <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
 
   <style>
+    :root {
+      --base: #ffc600;
+      --spacing: 10px;
+      --blur: 10px;
+    }
+/* I believe these are the default values  */
+/* this is how you set variables in css. variables have been set */
+    img {
+      padding: var(--spacing);
+      background: var(--base);
+      filter: blur(var(--blur));
+    }
+    /* when calling a node in css you can just call it like this 
+    also we are calling the variable here*/
+
+    .hl {
+      color: var(--base);
+    }
+    /* when calling a class, you did it like this */
+    
 
     /*
       misc styles, nothing to do with CSS variables
@@ -45,7 +65,16 @@
   </style>
 
   <script>
-  </script>
+    const inputs = document.querySelectorAll('.controls input')
 
+    function handleUpdate() {
+      const suffix = this.dataset.sizing || '';
+      document.documentElement.style.setProperty(`--${this.name}`, this.value);
+    }
+
+    inputs.forEach(input => input.addEventListener('change', handleUpdate))
+    inputs.forEach(input => input.addEventListener('mousemove', handleUpdate
+  </script>
+<!-- where we write our javascript code! -->
 </body>
 </html>

@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>JS Drum Kit</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css"> //how you link to an external style sheet
 </head>
+
 <body>
 
 
-  <div class="keys">
+  <div class="keys"> //div with class of keys
     <div data-key="65" class="key">
       <kbd>A</kbd>
       <span class="sound">clap</span>
@@ -46,6 +48,11 @@
       <span class="sound">tink</span>
     </div>
   </div>
+  ////bunch of divs with class of key //when key is hit data-key will trigger the audio
+  with the same data-key number
+  //used to define keyboard input
+  //span tag is an inline container used to mark up a part of a text, like change
+  its color
 
   <audio data-key="65" src="sounds/clap.wav"></audio>
   <audio data-key="83" src="sounds/hihat.wav"></audio>
@@ -57,10 +64,30 @@
   <audio data-key="75" src="sounds/tom.wav"></audio>
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
-<script>
+  <script> //script tag is used to embed a client side script, like Javascript. You either directly write your javascript code here or you point to external javasript file using an src attribute
+    window.addEventListener('keydown', playSound);
 
-</script>
+    function playSound(e) {
+      const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`); //searching for audio tag with data key that matches
+      const key = document.querySelector(`.key[data-key="${e.keyCode}"]`); //searching for a node with class of key and data key = the number
+      if (!audio) return;
+      audio.currentTime = 0; //rewind to start
+      audio.play() //used to play audio file on web page. Nice!
+      key.classList.add('playing') //Adds one or more class names to an element. can toggle back and forth
+    }
+
+    function removeTransition(e) {
+      if (e.propertyName !== 'transform') return;
+      this.classList.remove('playing')
+
+    }
+
+    const keys = document.querySelectorAll('.key');
+    keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+//window object represents the open window in the browser. I think this means we're listening for a keydown event when this window is open.
+  </script>
 
 
 </body>
+
 </html>
