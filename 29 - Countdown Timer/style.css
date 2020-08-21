@@ -79,4 +79,5 @@ body {
 .display__end-time {
   font-size: 4rem;
   color: white;
+  cursor: pointer;
 }

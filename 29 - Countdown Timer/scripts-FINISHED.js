@@ -32,6 +32,7 @@ function displayTimeLeft(seconds) {
   timerDisplay.textContent = display;
 }
 
+
 function displayEndTime(timestamp) {
   const end = new Date(timestamp);
   const hour = end.getHours();
